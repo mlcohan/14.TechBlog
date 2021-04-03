@@ -1,10 +1,35 @@
 const router = require('express').Router();
-const { Dashboard } = require('../../models');
+const { Comment, Post, User  } = require('../../models');
 const withAuth = require('../../utils/auth');
+
+router.get('/', async (req, res) => {
+  try {
+    const commentData = await Comment.findAll({
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ['name'],
+        },
+      ],
+    });
+
+    // Serialize data so the template can read it
+    const blogs = dashboardData.map((blog) => blog.get({ plain: true }));
+
+    // Pass serialized data and session flag into template
+    res.render('homepage', { 
+      blogs, 
+      logged_in: req.session.logged_in 
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 router.post('/', withAuth, async (req, res) => {
   try {
-    const newBlog = await Dashboard.create({
+    const newComment = await Comment.create({
       ...req.body,
       user_id: req.session.user_id,
     });
