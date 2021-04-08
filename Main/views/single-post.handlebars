@@ -1,7 +1,27 @@
-<div>
-    <h1>{{{{{post.title}}</h1>
-    <p>{{post.body}} </p>
 
+<div class="card single-post-padding">
+    <h1 id="post-title" class="post-header">{{post.title}} </h1>
+    <h4>Posted by {{post.user.username}}</h4>
+    <div class="container">
+        <p id="post-body" class="post-text post-text-padding">{{post.body}}</p>
+    </div>
+    {{#if currentUser}}
+    <button id="edit-btn">Edit</button>
+    {{/if}}
 </div>
 
-<script src="./js/single.js"></script>
+<div class="padding-20">
+    <form id="comment-form " class="padding-20">
+        <label for="comment-text">Comment:</label>
+        <input class="padding-20" type="textarea" name="comment-text" id="comment-text">
+        <button class="padding-20" id="post-comment-btn">Post</button>
+    </form>
+</div>
+
+{{#each post.comments as |singleComment|}}
+{{> comment singleComment}}
+{{/each}}
+<script src="/js/single.js"></script>
+{{#if currentUser}}
+<script src="/js/edit.js"> </script>
+{{/if}}

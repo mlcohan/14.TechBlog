@@ -1,2 +1,11 @@
-<h1>My Posts</h1>
- 
+<section>
+  <h2>Your Posts</h2>
+    {{#each posts as |post|}}
+      {{> dashboard-postinfo post}}
+    {{/each}}
+
+</section>
+
+<button type="submit" class="new-post-btn"><a class="link" href="/dashboard/new">New Post</a></button>
+
+<script src="/javascript/new.js"></script>
