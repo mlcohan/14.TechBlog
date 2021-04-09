@@ -22,7 +22,9 @@ router.post('/', async (req, res) => {
 });
 
 // Login
+//find out where post request is being submitted, form sends post request to this route, eventhandler never being triggered 
 router.post('/login', async (req, res) => {
+  console.log("we are in the post login route")
   try {
     const dbUserData = await User.findOne({
       where: {
