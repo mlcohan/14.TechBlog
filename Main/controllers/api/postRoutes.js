@@ -19,12 +19,17 @@ router.post('/', withAuth, async (req, res) =>{
 
 //check this 
 router.put('/:id', withAuth, async (req, res) => {
-    const body = req.body
     try {
-    newPost = await Post.update({
-        ...body,
-        userId:req.session.userId
+    const [newPost] = await Post.update({
+      where:{
+          id: req.params.id
+      }
     })
+    if(newPost > 0){
+        res.status(200).end()
+    } else {
+        res.status(404).end()
+    }
 }catch (err) {
     console.log(err);
         res.status(500).json(err)

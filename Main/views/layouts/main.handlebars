@@ -20,7 +20,8 @@
         <a href="/dashboard">Dashboard</a> |
         <button class="no-button" id="logout">logout</button>
         {{else}}
-        <a href="/login">login</a>
+        <a href="/login">Login</a>
+        <a href="/signup">Sign Up</a>
         {{/if}}
       </nav>
     </header>
@@ -35,7 +36,7 @@
 
   <!-- Render script for logged in users only -->
   {{#if logged_in}}
-  <script src="/js/home.js"></script>
+  <script src="../public/js/home.js"></script>
   {{/if}}
 </body>
 
